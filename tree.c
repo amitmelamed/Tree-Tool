@@ -6,6 +6,8 @@
 #include <pwd.h>
 #include <grp.h>
 
+#include <limits.h>
+#include <string.h>
 
 
 void print_tree(const char* path,int level) {
@@ -61,12 +63,13 @@ void print_tree(const char* path,int level) {
 }
 
 int main(int argc, char* argv[]) {
-    if (argc != 2) {
-        fprintf(stderr, "Usage: %s <file or directory>\n", argv[0]);
-        return EXIT_FAILURE;
+    if (argc == 2) {
+        char* path = argv[1];
+        printf("path: %s\n",path);
+        print_tree(path,0);
+    } else {
+        char* path = ".";
+        print_tree(path,0);
     }
-
-    print_tree(argv[1],0);
-
     return EXIT_SUCCESS;
 }
